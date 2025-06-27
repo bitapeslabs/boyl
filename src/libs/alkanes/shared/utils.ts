@@ -570,7 +570,7 @@ export async function waitForTransaction({
 
       if (result) {
         await delay(5000);
-        break;
+        return result;
       }
 
       // Check for timeout

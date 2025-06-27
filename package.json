@@ -1,15 +1,19 @@
 {
   "name": "boyl",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "bin": {
     "boyl": "./dist/index.js"
   },
-  "description": "",
-  "main": "index.js",
+  "files": [
+    "dist"
+  ],
+  "description": "An expressive CLI toolset for Alkanes mantained by Bitapes Labs",
+  "main": "./dist/index.js",
   "scripts": {
     "dev": "node esbuild.config.mjs && node dist/index.js",
     "dev-nobuild": "node dist/index.js",
-    "build": "node esbuild.config.mjs"
+    "build": "node esbuild.config.mjs",
+    "start": "node dist/index.js"
   },
   "author": "",
   "license": "ISC",

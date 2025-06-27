@@ -6,7 +6,6 @@ import { Provider } from "@/libs/alkanes/provider";
 
 export const DEFAULT_ERROR = "An unknown error occurred";
 
-export const CONTRACT_NAME = process.env.CONTRACT_NAME;
 export const ELECTRUM_API_URL = "https://boylnet.mezcal.sh/esplora";
 export const EXPLORER_URL = "https://boylnet.mezcal.sh";
 export const CURRENT_BTC_TICKER = "rBTC";

@@ -97,14 +97,11 @@ export class Provider {
     }
     await this?.sandshrew?.bitcoindRpc?.sendRawTransaction?.(rawTx);
 
-    await waitForTransaction({
+    const txInMemPool = await waitForTransaction({
       txId,
       sandshrewBtcClient: this.sandshrew,
     });
 
-    const txInMemPool = await this?.sandshrew?.bitcoindRpc?.getMemPoolEntry?.(
-      txId
-    );
     const fee = txInMemPool.fees["base"] * 10 ** 8;
 
     return {

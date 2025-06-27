@@ -16,30 +16,7 @@ import { consumeOrThrow } from "@/boxed";
 import { esplora_broadcastTx, esplora_getutxos } from "@/apis/esplora";
 import { getCurrentTaprootAddress } from "@/crypto/wallet";
 import chalk from "chalk";
-const filePathSchema = z.string().refine(
-  (val) => {
-    // reject empty / whitespace
-    if (!val.trim()) return false;
 
-    // 1️⃣ split out an optional drive prefix (Windows)
-    let rest = val;
-    const drive = /^[a-zA-Z]:/;
-    if (drive.test(val)) {
-      rest = val.slice(2); // keep everything after `C:`
-    }
-
-    // 2️⃣ ensure no additional colons and no forbidden chars
-    const illegal = /[<>:"|?*\x00-\x1F]/;
-    if (illegal.test(rest)) return false;
-    if ((rest.match(/:/g) || []).length) return false; // extra `:`
-
-    // 3️⃣ quick sanity: no NULL-byte segments, no empty segments like `\\`
-    if (rest.split(/[/\\]/).some((seg) => seg === "")) return false;
-
-    return true;
-  },
-  { message: "Invalid file path" }
-);
 export class Deploy extends Command {
   static override description = "Deploy an alkanes smart contract";
   static override examples = ["$ boyl deploy <path/to/wasm>"];
@@ -89,7 +66,7 @@ export class Deploy extends Command {
         totalAmount: utxos.reduce((sum, utxo) => sum + utxo.value, 0),
       };
 
-      const { rawTx } = await contractDeployment({
+      const { txId } = await contractDeployment({
         signer: oylSigner,
         account: oylAccount,
         payload,
@@ -99,10 +76,8 @@ export class Deploy extends Command {
         feeRate: 10,
       });
 
-      const txid = consumeOrThrow(await esplora_broadcastTx(rawTx));
-
       console.log(chalk.greenBright("\n✓ Contract Deployed\n"));
-      console.log(chalk.gray(`Transaction: ${EXPLORER_URL}/tx/${txid}`));
+      console.log(chalk.gray(`Transaction: ${EXPLORER_URL}/tx/${txId}`));
     } catch (err) {
       this.error(
         `Failed to deploy contract: ${

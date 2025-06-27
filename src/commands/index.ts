@@ -6,10 +6,13 @@ import WalletShowAddress from "./wallet/info";
 import WalletSwitch from "./wallet/switch";
 import { Deploy } from "./deploy";
 import { Command } from "./base";
+import Balance from "./balance";
+import simulate from "./simulate";
 
 export const commands: Record<string, typeof Command> = {
   wallets: Wallets,
-
+  balance: Balance,
+  simulate: simulate,
   "wallet:switch": WalletSwitch,
   "wallet:generate": WalletGenerate,
   "wallet:recover": WalletRecover,

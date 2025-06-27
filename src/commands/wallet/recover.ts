@@ -93,7 +93,7 @@ export default class WalletRecover extends Command {
     );
     this.log(
       chalk.gray(
-        "You can reprint your mnemonic any time with `mezcal wallet show`"
+        "You can reprint your mnemonic any time with `boyl wallet show`"
       )
     );
   }

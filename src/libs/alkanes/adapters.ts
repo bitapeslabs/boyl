@@ -30,7 +30,7 @@ export async function getAlkanesDeploymentParamsFromWasmPath(
     tags: { contentType: "" }, // set if you want MIME-style tagging
   };
 
-  const callData = [1n, 0n];
+  const callData = [1n, 0n, 100n];
 
   const protostone = encodeRunestoneProtostone({
     protostones: [

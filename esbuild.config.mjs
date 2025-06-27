@@ -26,4 +26,7 @@ await build({
       JSON.stringify(val),
     ])
   ),
+  banner: {
+    js: `#!/usr/bin/env node\n`,
+  },
 });

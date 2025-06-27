@@ -25,7 +25,7 @@ export const getWallet = async (
     if (!ignoreErrors) {
       command.error(
         `No wallet found at ${target}\n` +
-          chalk.gray(`You can create one with: mezcal wallet generate`)
+          chalk.gray(`You can create one with: boyl wallet generate`)
       );
     }
     return new BoxedError(SharedCommandErrors.NoWalletFound);
